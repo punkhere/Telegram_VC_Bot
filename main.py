@@ -348,9 +348,6 @@ async def deezer(requested_by, query):
         caption=f"Playing [{title}]({url}) Via Deezer.",
     )
     os.remove("final.png")
-    await asyncio.sleep(int(r[0]["duration"]))
-    await m.delete()
-    playing = False
 
 
 # Jiosaavn--------------------------------------------------------------------------------------
@@ -391,9 +388,6 @@ async def jiosaavn(requested_by, query):
         photo="final.png",
     )
     os.remove("final.png")
-    await asyncio.sleep(sduration)
-    await m.delete()
-    playing = False
 
 
 # Youtube Play-----------------------------------------------------------------------------------
@@ -440,9 +434,6 @@ async def ytplay(requested_by, query):
         photo="final.png",
     )
     os.remove("final.png")
-    await asyncio.sleep(time_to_seconds(duration))
-    playing = False
-    await m.delete()
 
 
 # Telegram Audio--------------------------------------------------------------------------------
@@ -474,7 +465,6 @@ async def tgplay(_, message):
     m = await message.reply_text("Downloading")
     await app.download_media(message.reply_to_message, file_name="audio.webm")
     await m.edit(f"Playing `{message.reply_to_message.link}`")
-    playing = False
     os.remove("downloads/audio.webm")
 
 

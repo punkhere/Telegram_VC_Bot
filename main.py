@@ -83,7 +83,10 @@ async def unauthorize(_, message):
     await message.reply_text("Chat Unauthorized.")
 
 
-vc = GroupCall(app, input_file)
+vc = GroupCall(app, input_filename=input_file, play_on_repeat=False
+        enable_logs_to_console=False)
+
+
 # Join Voice Chat
 
 
@@ -239,29 +242,6 @@ async def queuer(_, message):
     await m.delete()
 
 
-# Skip command
-
-
-@app.on_message(
-    filters.command("skip") & filters.chat(sudo_chats) & ~filters.edited
-)
-async def skip(_, message):
-    global playing
-    if message.from_user.id not in await getadmins(sudo_chat_id):
-        return
-    if len(queue) == 0:
-        m = await message.reply_text("Queue Is Empty, Just Like Your Life.")
-        await asyncio.sleep(5)
-        await m.delete()
-        await message.delete()
-        return
-    playing = False
-    m = await message.reply_text("Skipped!")
-    await asyncio.sleep(5)
-    await m.delete()
-    await message.delete()
-
-
 @app.on_message(
     filters.command("queue") & filters.chat(sudo_chats) & ~filters.edited
 )
@@ -270,7 +250,7 @@ async def queue_list(_, message):
         i = 1
         text = ""
         for song in queue:
-            text += f"**{i}. Platform:** {song['service']} | **Song:** {song['song']}\n"
+            text += f"**{i}. Platform:** __{song['service']}__ | **Song:** __{song['song']}__ | **User:** __{song['requested_by']}__\n"
             i += 1
         m = await message.reply_text(text, disable_web_page_preview=True)
     else:
@@ -279,6 +259,12 @@ async def queue_list(_, message):
     await m.delete()
     await message.delete()
 
+
+@group_call.on_playout_ended
+async def play_another(group_call, input_file)
+    global playing
+    playing = False
+    await play()
 
 # Ping and repo
 

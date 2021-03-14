@@ -262,7 +262,7 @@ async def queue_list(_, message):
 
 
 @group_call.on_playout_ended
-async def play_another(group_call, input_file)
+async def play_another(group_call, input_file):
     global playing
     playing = False
     await play()

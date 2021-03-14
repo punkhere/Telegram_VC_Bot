@@ -83,7 +83,8 @@ async def unauthorize(_, message):
     await message.reply_text("Chat Unauthorized.")
 
 
-vc = GroupCall(app, input_filename=input_file, play_on_repeat=False
+vc = GroupCall(app, input_filename=input_file,
+        play_on_repeat=False,
         enable_logs_to_console=False)
 
 

@@ -1,5 +1,5 @@
-api_id = 1218324
-api_hash = "dd471e72c0f98c92720639d510a364aa"
+api_id = 941514
+api_hash = "2b8e24188631929de4bda0c008ba1685"
 sudo_chat_id = -1001464356442
 owner_id = 896268975
 
